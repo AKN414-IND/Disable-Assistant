@@ -1,0 +1,56 @@
+.exam-page {
+    text-align: center;
+    padding: 50px;
+    background-color: #f0f4f8; /* Light blue-grey background for a soft look */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333; /* Darker font color for readability */
+  }
+  
+  .class-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for the boxes */
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .class-box {
+    background-color: #ff7f50; /* Coral color for an eye-catching look */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  
+  .class-box:hover {
+    background-color: #ff6347; /* Slightly darker coral on hover */
+  }
+  
+  .class-box h3 {
+    margin: 0;
+    font-size: 22px;
+  }
+  
+  @media (max-width: 768px) {
+    .class-container {
+      grid-template-columns: repeat(2, 1fr); /* Adjust grid to 2 columns for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .class-container {
+      grid-template-columns: repeat(1, 1fr); /* 1 column for mobile screens */
+    }
+  }
+  
