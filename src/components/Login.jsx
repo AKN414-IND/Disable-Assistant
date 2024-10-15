@@ -1,12 +1,3 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import Auth from './Auth'; 
-import "./Login.css";
-
-export const Login = () => {
-  const handleAuthChange = () => {
-    console.log('Authentication state changed');
-=======
 import React, { useState } from 'react';
 import { Button, Form, Input, message } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
@@ -49,14 +40,10 @@ export const Login = () => {
     } finally {
       setLoading(false);
     }
->>>>>>> Stashed changes
   };
 
   return (
     <div className="ent1">
-<<<<<<< Updated upstream
-      <Auth onAuthChange={handleAuthChange} />
-=======
       <Form
         name="login"
         labelCol={{ span: 8 }}
@@ -111,7 +98,6 @@ export const Login = () => {
           </div>
         </Form.Item>
       </Form>
->>>>>>> Stashed changes
     </div>
   );
 };
