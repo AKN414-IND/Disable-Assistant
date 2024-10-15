@@ -22,7 +22,7 @@ export const LandingPage = () => {
         <div className="option" onClick={() => navigate('/community')}>
           <h3>Community</h3>
         </div>
-        <div className="option" onClick={() => navigate('/contact-professionals')}>
+        <div className="option" onClick={() => navigate('/contact-professional')}>
           <h3>Contact Professionals</h3>
         </div>
         <div className="option" onClick={() => navigate('/kids-entertainment')}>
