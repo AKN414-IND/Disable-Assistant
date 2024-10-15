@@ -40,15 +40,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-<<<<<<< Updated upstream
-        <Route path="/home" element={<LandingPage />} />
-        <Route path="/videos" element={<Videos />} />
-        <Route path="/exam" element={<Exam />} />
-        <Route path="/future-enhancement" element={<Future />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/contact-professional" element={<ContactProfessionals />} />
-        <Route path="/kids-entertainment" element={<KidsEntertainment />} />
-=======
         <Route
           path="/home"
           element={
@@ -64,7 +55,6 @@ function App() {
         <Route path="/contact-professional" element={<PrivateRoute><ContactProfessionals /></PrivateRoute>} />
         <Route path="/kids-entertainment" element={<PrivateRoute><KidsEntertainment /></PrivateRoute>} />
 
->>>>>>> Stashed changes
       </Routes>
     </Router>
   );
