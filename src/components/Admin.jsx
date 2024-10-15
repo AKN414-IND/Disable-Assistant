@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Admin.css'; // Optional: Import CSS for styling
+import './Admin.css'; 
 
 export default function Admin() {
   const navigate = useNavigate();
