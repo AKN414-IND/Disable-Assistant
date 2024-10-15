@@ -1,16 +1,26 @@
 import React from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';  // Import Link for navigation
+import { useNavigate, Link } from 'react-router-dom'; 
 import "./Login.css";
 
-const onFinish = (values) => {
-  console.log('Success:', values);
+const onFinish = (values, navigate) => {
+  const { username, password } = values;
+
+  if (username === 'admin' && password === 'admin') {
+    console.log('Login successful!');
+    navigate('/home');  
+  } else {
+    console.log('Invalid username or password');
+    alert('Invalid credentials! Please try again.');
+  }
 };
+
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 
 export const Login = () => {
+  const navigate = useNavigate(); 
   return (
     <div className="ent1">
       <Form
@@ -27,7 +37,7 @@ export const Login = () => {
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
+        onFinish={(values) => onFinish(values, navigate)} 
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
@@ -58,24 +68,13 @@ export const Login = () => {
         </Form.Item>
 
         <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item
           wrapperCol={{
             offset: 8,
             span: 16,
           }}
         >
           <Button type="primary" htmlType="submit">
-            Submit
+            Login 
           </Button>
         </Form.Item>
         
@@ -93,3 +92,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;
