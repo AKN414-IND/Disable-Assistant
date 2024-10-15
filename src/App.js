@@ -12,6 +12,8 @@ import Community from './components/Community';
 import ContactProfessionals from './components/ContactProfessionals';
 import KidsEntertainment from './components/KidsEntertainment';
 import ExamListPage from './components/ExamListPage';
+import Admin from './components/Admin';
+import VideoUpload from './components/VideoUpload';
 
 const PrivateRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -56,6 +58,8 @@ function App() {
         <Route path="/community" element={<PrivateRoute><Community /></PrivateRoute>} />
         <Route path="/contact-professional" element={<PrivateRoute><ContactProfessionals /></PrivateRoute>} />
         <Route path="/kids-entertainment" element={<PrivateRoute><KidsEntertainment /></PrivateRoute>} />
+        <Route path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>} />
+        <Route path="/upload-video" element={<PrivateRoute><VideoUpload/></PrivateRoute>} />
 
       </Routes>
     </Router>
