@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';  
+import { signOut, onAuthStateChanged } from 'firebase/auth';  
 import { auth } from '../Firebase'; 
 import './LandingPage.css'; 
 
 export const LandingPage = () => {
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -18,12 +19,37 @@ export const LandingPage = () => {
     }
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.email === 'appukuttan673@gmail.com') {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+        }
+      } else {
+        setIsAdmin(false); 
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleAdminRedirect = () => {
+    navigate('/admin'); 
+  };
+
   return (
     <div className="landing-page">
       <div className="logout-container">
         <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
+        {isAdmin && (
+          <button className="admin-btn" onClick={handleAdminRedirect}>
+            Admin
+          </button>
+        )}
       </div>
 
       <h1>Welcome to the Platform</h1>
