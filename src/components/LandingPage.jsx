@@ -32,7 +32,7 @@ export const LandingPage = () => {
         <div className="option" onClick={() => navigate('/videos')}>
           <h3>Videos</h3>
         </div>
-        <div className="option" onClick={() => navigate('/exampage')}>  {/* Updated path to '/exam' */}
+        <div className="option" onClick={() => navigate('/exam')}>  
           <h3>Exam</h3>
         </div>
         <div className="option" onClick={() => navigate('/future-enhancement')}>
