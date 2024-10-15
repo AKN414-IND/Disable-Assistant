@@ -1,12 +1,31 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';  
+import { auth } from '../Firebase'; 
 import './LandingPage.css'; 
 
 export const LandingPage = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);  
+      console.log('User logged out from Firebase');
+      navigate('/'); 
+    } catch (error) {
+      console.error('Error during logout:', error.message);
+      alert('Error during logout. Please try again.');
+    }
+  };
 
   return (
     <div className="landing-page">
+      <div className="logout-container">
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+
       <h1>Welcome to the Platform</h1>
       <p>Select an option to get started:</p>
       <div className="options-container">

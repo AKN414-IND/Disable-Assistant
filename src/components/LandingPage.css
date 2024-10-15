@@ -1,48 +1,39 @@
 .landing-page {
-    text-align: center;
-    padding: 50px;
-    background-color: #f0f2f5;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-  
-  p {
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
+  text-align: center;
+  padding: 20px;
+}
 
-  .options-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .option {
-    background-color: #1890ff;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .option:hover {
-    background-color: #40a9ff;
-  }
-  
-  .option h3 {
-    margin: 0;
-    font-size: 20px;
-  }
-  
+.options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.option {
+  background-color: #f0f0f0;
+  margin: 10px;
+  padding: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 200px;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #d32f2f;
+}
