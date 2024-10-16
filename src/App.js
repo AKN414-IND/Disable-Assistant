@@ -24,7 +24,6 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsAuthenticated(true);
-        // Check if the logged-in user is the admin
         if (user.email === 'appukuttan673@gmail.com') {
           setIsAdmin(true);
         } else {
@@ -45,10 +44,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Route */}
         <Route path="/" element={<Login />} />
 
-        {/* Authenticated (Private) Routes */}
         <Route
           path="/home"
           element={
@@ -98,7 +95,6 @@ function App() {
           }
         />
 
-        {/* Admin Routes */}
         <Route
           path="/admin"
           element={
