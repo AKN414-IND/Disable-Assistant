@@ -43,61 +43,74 @@ export const Login = () => {
   };
 
   return (
-    <div className="ent1">
-      <Form
-        name="login"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            {
-              required: true,
-              type: 'email',
-              message: 'Please input a valid email!',
-            },
-          ]}
+    <div className="login-page">
+      <div className="login-container">
+        <Form
+          className="login-form"
+          name="login"
+          labelCol={{ span: 24 }}
+          wrapperCol={{ span: 24 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
         >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              {
+                required: true,
+                type: 'email',
+                message: 'Please input a valid email!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit" loading={loading}>
-            Login
-          </Button>
-        </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" loading={loading}>
+              Login
+            </Button>
+          </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button onClick={handleGoogleSignIn} loading={loading}>
-            Sign in with Google
-          </Button>
-        </Form.Item>
-        
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <div>
-            New user? <Link to="/register">Register</Link>
-          </div>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Button 
+              onClick={handleGoogleSignIn} 
+              loading={loading}
+              icon={
+                <img 
+                  src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+                  alt="Google logo" 
+                  className="google-icon"
+                />
+              }
+              className="google-signin-btn"
+            >
+              Sign in with Google
+            </Button>
+          </Form.Item>
+          
+          <Form.Item>
+            <div className="register-link">
+              New user? <Link to="/register">Register</Link>
+            </div>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };

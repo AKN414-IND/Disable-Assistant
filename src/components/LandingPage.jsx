@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signOut, onAuthStateChanged } from 'firebase/auth';  
-import { auth } from '../Firebase'; 
-import './LandingPage.css'; 
+import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../Firebase';
+import { Modal, Avatar, Button } from 'antd';
+import './LandingPage.css';
 
 export const LandingPage = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
+  const [username, setUsername] = useState(''); 
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);  
+      await signOut(auth);
       console.log('User logged out from Firebase');
-      navigate('/'); 
+      navigate('/');
     } catch (error) {
       console.error('Error during logout:', error.message);
       alert('Error during logout. Please try again.');
@@ -20,15 +25,40 @@ export const LandingPage = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (user.email === 'appukuttan673@gmail.com') {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        if (currentUser.email === 'appukuttan673@gmail.com') {
           setIsAdmin(true);
         } else {
           setIsAdmin(false);
         }
+
+  
+        if (currentUser.providerData[0]?.providerId === 'google.com' && currentUser.photoURL) {
+          setUsername(currentUser.displayName);
+          const emailFirstLetter = currentUser.email.charAt(0).toUpperCase()+currentUser.email.charAt(1).toUpperCase();
+          const textColor = 'ffffff'; 
+          const blackBackground = '000000'; 
+          setProfileImageUrl(
+            `https://ui-avatars.com/api/?name=${emailFirstLetter}&background=${blackBackground}&color=${textColor}&size=150`
+          );
+        } else {
+
+          const emailFirstLetter = currentUser.email.charAt(0).toUpperCase()+currentUser.email.charAt(1).toUpperCase();
+          const textColor = 'ffffff'; 
+          const blackBackground = '000000'; 
+          setProfileImageUrl(
+            `https://ui-avatars.com/api/?name=${emailFirstLetter}&background=${blackBackground}&color=${textColor}&size=150`
+          );
+
+        
+          const emailUsername = currentUser.email.split('@')[0];
+          setUsername(emailUsername);
+        }
       } else {
-        setIsAdmin(false); 
+        setUser(null);
+        setIsAdmin(false);
       }
     });
 
@@ -36,12 +66,27 @@ export const LandingPage = () => {
   }, []);
 
   const handleAdminRedirect = () => {
-    navigate('/admin'); 
+    navigate('/admin');
+  };
+
+  const showProfileModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
   };
 
   return (
     <div className="landing-page">
       <div className="logout-container">
+        <Avatar
+          size="large"
+          src={profileImageUrl}
+          onClick={showProfileModal}
+          style={{ cursor: 'pointer', marginRight: '10px' }}
+        />
+
         <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
@@ -58,7 +103,7 @@ export const LandingPage = () => {
         <div className="option" onClick={() => navigate('/videos')}>
           <h3>Videos</h3>
         </div>
-        <div className="option" onClick={() => navigate('/exam')}>  
+        <div className="option" onClick={() => navigate('/exam')}>
           <h3>Exam</h3>
         </div>
         <div className="option" onClick={() => navigate('/future-enhancement')}>
@@ -74,6 +119,25 @@ export const LandingPage = () => {
           <h3>Kids Entertainment</h3>
         </div>
       </div>
+
+      {user && (
+        <Modal
+          title="Profile Details"
+          visible={isModalVisible}
+          onCancel={handleModalClose}
+          footer={[
+            <Button key="close" onClick={handleModalClose}>
+              Close
+            </Button>
+          ]}
+        >
+          <div style={{ textAlign: 'center' }}>
+            <Avatar size={100} src={profileImageUrl} />
+            <h3 style={{ marginTop: '20px' }}>{username}</h3> 
+            <p>Email: {user.email}</p>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
