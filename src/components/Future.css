@@ -1,0 +1,183 @@
+/* Main container styles */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(145deg, #ffffff, #f5f7fa);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styles */
+.text-center {
+    text-align: center;
+}
+
+h2.ant-typography {
+    color: #2c3e50;
+    margin-bottom: 2rem !important;
+    font-weight: 600;
+    font-size: 2.2rem;
+    background: linear-gradient(120deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Row container */
+.row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+/* Column styles */
+.col {
+    flex: 1;
+}
+
+.col-auto {
+    flex: 0 0 auto;
+}
+
+/* Input styles */
+.ant-input {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 2px solid #e8eef3;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ant-input:hover {
+    border-color: #3498db;
+}
+
+.ant-input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Button styles */
+.ant-btn-primary {
+    height: 46px;
+    padding: 0 24px;
+    font-size: 1rem;
+    border-radius: 10px;
+    background: #3498db;
+    border: none;
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+    transition: all 0.3s ease;
+}
+
+.ant-btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(52, 152, 219, 0.3);
+}
+
+.ant-btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Loading spinner styles */
+.mt-3 {
+    margin-top: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
+.ant-spin {
+    margin: 2rem 0;
+}
+
+.ant-spin-text {
+    color: #3498db;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Response container styles */
+.mt-3 {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.mt-3 div {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+/* Strong text in responses */
+.mt-3 strong {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .col-auto {
+        width: 100%;
+    }
+
+    .ant-btn-primary {
+        width: 100%;
+    }
+
+    h2.ant-typography {
+        font-size: 1.8rem;
+    }
+}
+
+/* Animation for response appearance */
+.mt-3 {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}
