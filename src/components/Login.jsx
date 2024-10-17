@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, message } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase'; 
 import "./Login.css";
 
@@ -10,8 +10,9 @@ const googleProvider = new GoogleAuthProvider();
 export const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false); // State to toggle between login and registration
 
-  const onFinish = async (values) => {
+  const onFinishLogin = async (values) => {
     const { email, password } = values;
     setLoading(true);
 
@@ -22,6 +23,22 @@ export const Login = () => {
     } catch (error) {
       console.error('Error during login:', error.message);
       message.error('Invalid credentials! Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onFinishRegister = async (values) => {
+    const { email, password } = values;
+    setLoading(true);
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      message.success('Registration successful! You can now log in.');
+      setIsRegistering(false); // Switch back to login after successful registration
+    } catch (error) {
+      console.error('Error during registration:', error.message);
+      message.error('Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -51,41 +68,82 @@ export const Login = () => {
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true }}
-          onFinish={onFinish}
+          onFinish={isRegistering ? onFinishRegister : onFinishLogin}
           autoComplete="off"
         >
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                type: 'email',
-                message: 'Please input a valid email!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+          {!isRegistering && (
+            <>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    type: 'email',
+                    message: 'Please input a valid email!',
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading}>
-              Login
-            </Button>
-          </Form.Item>
+              <Form.Item>
+                <Button type="primary" htmlType="submit" loading={loading}>
+                  Login
+                </Button>
+              </Form.Item>
+            </>
+          )}
+
+          {isRegistering && (
+            <>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    type: 'email',
+                    message: 'Please input a valid email!',
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item>
+                <Button type="primary" htmlType="submit" loading={loading}>
+                  Register
+                </Button>
+              </Form.Item>
+            </>
+          )}
 
           <Form.Item>
             <Button 
@@ -106,7 +164,15 @@ export const Login = () => {
           
           <Form.Item>
             <div className="register-link">
-              New user? <Link to="/register">Register</Link>
+              {isRegistering ? (
+                <>
+                  Already have an account? <Button type="link" onClick={() => setIsRegistering(false)}>Login</Button>
+                </>
+              ) : (
+                <>
+                  New user? <Button type="link" onClick={() => setIsRegistering(true)}>Register</Button>
+                </>
+              )}
             </div>
           </Form.Item>
         </Form>
