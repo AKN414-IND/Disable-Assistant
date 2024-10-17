@@ -10,7 +10,7 @@ const googleProvider = new GoogleAuthProvider();
 export const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [isRegistering, setIsRegistering] = useState(false); // State to toggle between login and registration
+  const [isRegistering, setIsRegistering] = useState(false); 
 
   const onFinishLogin = async (values) => {
     const { email, password } = values;

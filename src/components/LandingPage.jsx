@@ -3,6 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../Firebase';
 import { Modal, Avatar, Button } from 'antd';
+import { 
+  VideoCameraOutlined, 
+  FormOutlined, 
+  RocketOutlined, 
+  TeamOutlined, 
+  PhoneOutlined, 
+  SmileOutlined 
+} from '@ant-design/icons';
 import './LandingPage.css';
 
 export const LandingPage = () => {
@@ -11,7 +19,7 @@ export const LandingPage = () => {
   const [user, setUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
-  const [username, setUsername] = useState(''); 
+  const [username, setUsername] = useState('');
 
   const handleLogout = async () => {
     try {
@@ -28,33 +36,20 @@ export const LandingPage = () => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        if (currentUser.email === 'appukuttan673@gmail.com') {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
+        setIsAdmin(currentUser.email === 'appukuttan673@gmail.com');
 
-  
-        if (currentUser.providerData[0]?.providerId === 'google.com' && currentUser.photoURL) {
-          setUsername(currentUser.displayName);
-          const emailFirstLetter = currentUser.email.charAt(0).toUpperCase()+currentUser.email.charAt(1).toUpperCase();
-          const textColor = 'ffffff'; 
-          const blackBackground = '000000'; 
-          setProfileImageUrl(
-            `https://ui-avatars.com/api/?name=${emailFirstLetter}&background=${blackBackground}&color=${textColor}&size=150`
-          );
-        } else {
-
-          const emailFirstLetter = currentUser.email.charAt(0).toUpperCase()+currentUser.email.charAt(1).toUpperCase();
-          const textColor = 'ffffff'; 
-          const blackBackground = '000000'; 
-          setProfileImageUrl(
-            `https://ui-avatars.com/api/?name=${emailFirstLetter}&background=${blackBackground}&color=${textColor}&size=150`
-          );
-
+        const emailFirstLetter = currentUser.email.charAt(0).toUpperCase() + currentUser.email.charAt(1).toUpperCase();
+        const textColor = 'ffffff';
+        const blackBackground = '000000';
         
-          const emailUsername = currentUser.email.split('@')[0];
-          setUsername(emailUsername);
+        if (currentUser.providerData[0]?.providerId === 'google.com' && currentUser.photoURL) {
+          setProfileImageUrl(currentUser.photoURL);
+          setUsername(currentUser.displayName);
+        } else {
+          setProfileImageUrl(
+            `https://ui-avatars.com/api/?name=${emailFirstLetter}&background=${blackBackground}&color=${textColor}&size=150`
+          );
+          setUsername(currentUser.email.split('@')[0]);
         }
       } else {
         setUser(null);
@@ -77,67 +72,65 @@ export const LandingPage = () => {
     setIsModalVisible(false);
   };
 
+  const options = [
+    { title: 'Videos', icon: <VideoCameraOutlined />, path: '/videos' },
+    { title: 'Exam', icon: <FormOutlined />, path: '/exam' },
+    { title: 'Future Enhancement', icon: <RocketOutlined />, path: '/future-enhancement' },
+    { title: 'Community', icon: <TeamOutlined />, path: '/community' },
+    { title: 'Contact Professionals', icon: <PhoneOutlined />, path: '/contact-professional' },
+    { title: 'Kids Entertainment', icon: <SmileOutlined />, path: '/kids-entertainment' },
+  ];
+
   return (
     <div className="landing-page">
-      <div className="logout-container">
+      <div className="top-bar">
         <Avatar
           size="large"
           src={profileImageUrl}
           onClick={showProfileModal}
-          style={{ cursor: 'pointer', marginRight: '10px' }}
+          style={{ cursor: 'pointer' }}
         />
-
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
-        {isAdmin && (
-          <button className="admin-btn" onClick={handleAdminRedirect}>
-            Admin
+        <div className="logout-container">
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
           </button>
-        )}
-      </div>
-
-      <h1>Welcome to the Platform</h1>
-      <p>Select an option to get started:</p>
-      <div className="options-container">
-        <div className="option" onClick={() => navigate('/videos')}>
-          <h3>Videos</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/exam')}>
-          <h3>Exam</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/future-enhancement')}>
-          <h3>Future Enhancement</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/community')}>
-          <h3>Community</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/contact-professional')}>
-          <h3>Contact Professionals</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/kids-entertainment')}>
-          <h3>Kids Entertainment</h3>
+          {isAdmin && (
+            <button className="admin-btn" onClick={handleAdminRedirect}>
+              Admin
+            </button>
+          )}
         </div>
       </div>
 
-      {user && (
-        <Modal
-          title="Profile Details"
-          visible={isModalVisible}
-          onCancel={handleModalClose}
-          footer={[
-            <Button key="close" onClick={handleModalClose}>
-              Close
-            </Button>
-          ]}
-        >
-          <div style={{ textAlign: 'center' }}>
-            <Avatar size={100} src={profileImageUrl} />
-            <h3 style={{ marginTop: '20px' }}>{username}</h3> 
-            <p>Email: {user.email}</p>
-          </div>
-        </Modal>
-      )}
+      <div className="content-area">
+        <h1>Welcome to the Platform</h1>
+        <p>Explore our range of services designed to enhance your experience and meet your needs.</p>
+        <div className="options-container">
+          {options.map((option, index) => (
+            <div key={index} className="option" onClick={() => navigate(option.path)}>
+              {option.icon}
+              <h3>{option.title}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Modal
+        title="Profile Details"
+        visible={isModalVisible}
+        onCancel={handleModalClose}
+        footer={[
+          <Button key="close" onClick={handleModalClose}>
+            Close
+          </Button>
+        ]}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <Avatar size={100} src={profileImageUrl} />
+          <h3 style={{ marginTop: '20px' }}>{username}</h3>
+          <p>Email: {user?.email}</p>
+        </div>
+      </Modal>
     </div>
   );
 };
