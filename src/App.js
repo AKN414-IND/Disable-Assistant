@@ -14,6 +14,8 @@ import KidsEntertainment from './components/KidsEntertainment';
 import ExamListPage from './components/ExamListPage';
 import Admin from './components/Admin';
 import VideoUpload from './components/VideoUpload';
+import VideoUploadKids from './components/VideoUploadKids';
+import ExamUpload from './components/ExamUpload';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -105,6 +107,18 @@ function App() {
           path="/upload-video"
           element={
             isAuthenticated && isAdmin ? <VideoUpload /> : <Navigate to="/" />
+          }
+        />
+        <Route
+          path="/kids-entertainment-upload"
+          element={
+            isAuthenticated && isAdmin ? <VideoUploadKids /> : <Navigate to="/" />
+          }
+        />
+        <Route
+          path="/exam-upload"
+          element={
+            isAuthenticated && isAdmin ? <ExamUpload /> : <Navigate to="/" />
           }
         />
       </Routes>

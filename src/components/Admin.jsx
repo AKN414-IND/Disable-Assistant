@@ -13,7 +13,7 @@ export default function Admin() {
         <div className="option" onClick={() => navigate('/upload-video')}>
           <h3>Videos</h3>
         </div>
-        <div className="option" onClick={() => navigate('/exam')}>
+        <div className="option" onClick={() => navigate('/exam-upload')}>
           <h3>Exam</h3>
         </div>
         <div className="option" onClick={() => navigate('/future-enhancement')}>
@@ -25,7 +25,7 @@ export default function Admin() {
         <div className="option" onClick={() => navigate('/contact-professional')}>
           <h3>Contact Professionals</h3>
         </div>
-        <div className="option" onClick={() => navigate('/kids-entertainment')}>
+        <div className="option" onClick={() => navigate('/kids-entertainment-upload')}>
           <h3>Kids Entertainment</h3>
         </div>
       </div>

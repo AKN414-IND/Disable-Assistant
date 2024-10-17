@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Input, Button, Spin, Typography } from 'antd';
+import "./Future.css";
 
 const { Title } = Typography;
 
