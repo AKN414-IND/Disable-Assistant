@@ -1,18 +1,19 @@
 import React from 'react';
 import { Button, Card, Row, Col } from 'antd';
+import './ContactProfessionals.css';
 const professionals = [
   {
     id: 1,
-    name: 'dummy 1',
-    designation: 'Doc',
+    name: 'John Doe',
+    designation: 'Doctor',
     whatsapp: '1234567890',
     email: 'john.doe@example.com',
     image: 'https://via.placeholder.com/100', 
   },
   {
     id: 2,
-    name: 'dummy 2',
-    designation: 'Doc',
+    name: 'Jane Smith',
+    designation: 'Doctor',
     whatsapp: '0987654321',
     email: 'jane.smith@example.com',
     image: 'https://via.placeholder.com/100', 
@@ -21,31 +22,32 @@ const professionals = [
 
 export default function ContactProfessionals() {
   return (
-    <div style={{ padding: '20px' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Contact Professionals</h2>
-      <Row gutter={6}>
+    <div className="container">
+      <h2 className="title">Contact Professionals</h2>
+      <Row gutter={16}>
         {professionals.map((professional) => (
-          <Col span={4} key={professional.id}>
+          <Col xs={24} sm={12} md={8} lg={6} key={professional.id}>
             <Card
               hoverable
-              style={{ borderRadius: '10px' }}
-              cover={<img alt={professional.name} src={professional.image} style={{ borderRadius: '10px 10px 0 0' }} />}
+              className="professional-card"
+              cover={<img alt={professional.name} src={professional.image} className="professional-image" />}
             >
               <Card.Meta
-                title={professional.name}
-                description={professional.designation}
+                title={<span className="professional-name">{professional.name}</span>}
+                description={<span className="professional-designation">{professional.designation}</span>}
               />
-              <div style={{ marginTop: '10px' }}>
+              <div className="button-container">
                 <Button 
                   type="primary" 
                   onClick={() => window.open(`https://wa.me/${professional.whatsapp}`, '_blank')}
+                  className="contact-button"
                 >
                   WhatsApp
                 </Button>
                 <Button 
                   type="default" 
                   onClick={() => window.open(`mailto:${professional.email}`, '_blank')}
-                  style={{ marginLeft: '10px' }}
+                  className="contact-button"
                 >
                   Email
                 </Button>

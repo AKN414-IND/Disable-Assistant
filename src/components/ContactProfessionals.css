@@ -1,0 +1,65 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.professional-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.professional-card:hover {
+    transform: translateY(-5px);
+}
+
+.professional-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 300px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.professional-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.professional-designation {
+    color: #666;
+}
+
+.button-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-button {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.contact-button:last-child {
+    margin-right: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .professional-card {
+        margin-bottom: 20px;
+    }
+}
