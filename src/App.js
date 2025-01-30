@@ -16,6 +16,8 @@ import Admin from './components/Admin';
 import VideoUpload from './components/VideoUpload';
 import VideoUploadKids from './components/VideoUploadKids';
 import ExamUpload from './components/ExamUpload';
+import CommunityUpload from './components/CommunityUpload';
+import ProfessionalUpload from './components/ProfessionalUpload';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -119,6 +121,18 @@ function App() {
           path="/exam-upload"
           element={
             isAuthenticated && isAdmin ? <ExamUpload /> : <Navigate to="/" />
+          }
+        />
+        <Route
+          path="/community-upload"
+          element={
+            isAuthenticated && isAdmin ? <CommunityUpload /> : <Navigate to="/" />
+          }
+        />
+        <Route
+          path="/professional-upload"
+          element={
+            isAuthenticated && isAdmin ? <ProfessionalUpload /> : <Navigate to="/" />
           }
         />
       </Routes>

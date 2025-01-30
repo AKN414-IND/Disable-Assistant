@@ -1,0 +1,110 @@
+.upload-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 50%, #9c27b0 100%);
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  .message {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  label {
+    color: white;
+    font-weight: 500;
+  }
+  
+  input, textarea, select {
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: inherit;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  select {
+    cursor: pointer;
+  }
+  
+  option {
+    background: #7b1fa2;
+    color: white;
+  }
+  
+  .submit-button {
+    background: #4caf50;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background: #45a049;
+  }
+  
+  @media (max-width: 768px) {
+    .upload-container {
+      padding: 1rem;
+    }
+  
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }

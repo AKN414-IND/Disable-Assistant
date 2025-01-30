@@ -11,7 +11,7 @@ function GeminiInReact() {
   const [loading, setLoading] = useState(false);
 
   const genAI = new GoogleGenerativeAI(
-    "AIzaSyDk8wuM0Qi5IRS17Z4RRuT8oFcopPMQrl8"
+    "AIzaSyAxqj-vV35poWZcHzWzigLvjCH8R_dglUc"
   );
 
   const handleInputChange = (e) => {
