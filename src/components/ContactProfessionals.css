@@ -1,132 +1,207 @@
 .professionals-page {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 50%, #9c27b0 100%);
-    padding: 2rem;
-    font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  padding: var(--spacing-large);
+  font-family: var(--font-family, 'Poppins', sans-serif);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: var(--header-color);
+  text-align: center;
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-small);
+  font-weight: 600;
+}
+
+.subtitle {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: var(--spacing-large);
+  font-size: var(--font-size-large);
+}
+
+.professionals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-large);
+  padding: var(--spacing-medium);
+}
+
+.professional-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: transform var(--transition-speed) ease, 
+              box-shadow var(--transition-speed) ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.professional-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.professional-info {
+  padding: var(--spacing-large);
+  text-align: center;
+}
+
+.professional-info h3 {
+  color: var(--header-color);
+  margin: 0;
+  font-size: var(--font-size-large);
+  font-weight: 600;
+}
+
+.designation {
+  color: var(--text-color);
+  margin: var(--spacing-small) 0 var(--spacing-large);
+  font-size: var(--font-size-base);
+}
+
+.contact-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-medium);
+}
+
+.contact-button {
+  padding: var(--spacing-small) var(--spacing-medium);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.whatsapp-button {
+  background-color: var(--success-color);
+  color: var(--white);
+}
+
+.whatsapp-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.email-button {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.email-button:hover {
+  background-color: var(--link-color);
+}
+
+.loading, .error {
+  color: var(--text-color);
+  text-align: center;
+  padding: var(--spacing-large);
+  font-size: var(--font-size-large);
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.specialty-tag {
+  display: inline-block;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: var(--spacing-small);
+  border-radius: var(--border-radius);
+  margin: var(--spacing-small);
+  font-size: var(--font-size-small);
+}
+.filters-container {
+  display: flex;
+  gap: var(--spacing-medium);
+  margin-bottom: var(--spacing-large);
+  padding: var(--spacing-medium);
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+}
+
+.filter-group {
+  min-width: 200px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: var(--spacing-small);
+  color: var(--text-color);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+}
+
+.filter-select {
+  width: 100%;
+  padding: var(--spacing-small);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  background-color: var(--white);
+  transition: border-color var(--transition-speed) ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.results-count {
+  text-align: center;
+  margin: var(--spacing-medium) 0;
+  color: var(--text-color);
+  font-size: var(--font-size-small);
+}
+
+.no-results {
+  text-align: center;
+  padding: var(--spacing-large);
+  color: var(--text-color);
+}
+
+.reset-filters {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.reset-filters:hover {
+  background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .filters-container {
+      flex-direction: column;
   }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+
+  .filter-group {
+      width: 100%;
   }
-  
-  h1 {
-    color: rgb(0, 0, 0);
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
+}
+@media (max-width: 768px) {
+  .professionals-page {
+      padding: var(--spacing-medium);
   }
-  
-  .subtitle {
-    color: #000000;
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-  }
-  
+
   .professionals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
-  }
-  
-  .professional-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-  
-  .professional-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .image-container {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-  }
-  
-  .professional-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .professional-info {
-    padding: 1.5rem;
-  }
-  
-  .professional-info h3 {
-    color: rgb(0, 0, 0);
-    margin: 0;
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
-  
-  .designation {
-    color: #000000;
-    margin: 0.5rem 0 1.5rem;
-    font-size: 1rem;
-  }
-  
-  .contact-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  
-  .whatsapp-button, .email-button {
-    padding: 0.75rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .whatsapp-button {
-    background-color: #25D366;
-    color: white;
-  }
-  
-  .whatsapp-button:hover {
-    background-color: #128C7E;
-  }
-  
-  .email-button {
-    background-color: #EA4335;
-    color: white;
-  }
-  .professional-info {
-    text-align: center;
-  }
-  
-  .email-button:hover {
-    background-color: #D73925;
-  }
-  
-  .loading, .error {
-    color: white;
-    text-align: center;
-    padding: 2rem;
-    font-size: 1.2rem;
-  }
-  
-  @media (max-width: 768px) {
-    .professionals-page {
-      padding: 1rem;
-    }
-  
-    .professionals-grid {
       grid-template-columns: 1fr;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
   }
+
+  h1 {
+      font-size: var(--font-size-large);
+  }
+}

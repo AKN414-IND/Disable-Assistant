@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { Input, Button, Spin, Typography } from 'antd';
+import { Input, Button, Spin } from 'antd';
 import "./Future.css";
-
-const { Title } = Typography;
 
 function GeminiInReact() {
   const [inputValue, setInputValue] = useState('');
@@ -20,7 +18,7 @@ function GeminiInReact() {
 
   const getResponseForGivenPrompt = async () => {
     if (!inputValue.trim()) {
-      alert("Please enter a value before submitting.");
+      alert("Please enter your abilities and disabilities.");
       return;
     }
 
@@ -33,15 +31,13 @@ function GeminiInReact() {
       const response = result.response;
       const text = response.text();
 
-      console.log("API Response:", text);
-
       setPromptResponses([...promptResponses, text]);
       setInputValue('');
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setLoading(false);
-      alert("An error occurred while fetching the response. Please try again.");
+      alert("An error occurred. Please try again.");
     }
   };
 
@@ -49,40 +45,58 @@ function GeminiInReact() {
     const lines = response.split('\n').filter(line => line.trim() !== '');
 
     return lines.map((line, index) => {
-      const formattedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^\*\s+/g, '');
+      const formattedLine = line
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^\*\s+/g, '');
       return (
-        <div key={index} dangerouslySetInnerHTML={{ __html: formattedLine }} />
+        <div key={index} className="suggestion-item" dangerouslySetInnerHTML={{ __html: formattedLine }} />
       );
     });
   };
 
   return (
-    <div className="container">
-      <Title level={2} className="text-center mb-4">Job Suggestion Assistant</Title>
-      <div className="row">
-        <div className="col">
-          <Input
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="List your disabilities and abilities..."
-            aria-label="User input for disabilities and abilities"
-          />
-        </div>
-        <div className="col-auto">
-          <Button type="primary" onClick={getResponseForGivenPrompt}>Send</Button>
-        </div>
-      </div>
-      {loading ? (
-        <div className="text-center mt-3">
-          <Spin tip="Loading your response..." />
-        </div>
-      ) : (
-        promptResponses.length > 0 && (
-          <div className="mt-3">
-            {formatResponse(promptResponses[promptResponses.length - 1])}
+    <div className="professionals-page">
+      <div className="container">
+        <h1>Job Suggestion Assistant</h1>
+        <p className="subtitle">Find suitable job recommendations based on your abilities</p>
+
+        <div className="input-container">
+          <div className="input-group">
+            <Input
+              value={inputValue}
+              onChange={handleInputChange}
+              placeholder="Describe your abilities and disabilities..."
+              className="custom-input"
+              aria-label="User input for abilities and disabilities"
+              onPressEnter={getResponseForGivenPrompt}
+            />
+            <Button 
+              type="primary" 
+              onClick={getResponseForGivenPrompt}
+              className="submit-button"
+            >
+              Get Suggestions
+            </Button>
           </div>
-        )
-      )}
+        </div>
+
+        {loading ? (
+          <div className="loading">
+            <Spin tip="Analyzing and generating suggestions..." />
+          </div>
+        ) : promptResponses.length > 0 && (
+          <div className="suggestions-container">
+            <div className="professional-card">
+              <div className="professional-info">
+                <h3>Job Suggestions</h3>
+                <div className="suggestions-list">
+                  {formatResponse(promptResponses[promptResponses.length - 1])}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

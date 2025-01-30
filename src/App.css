@@ -1,10 +1,47 @@
+:root {
+  /* Color Palette */
+  --primary-color: #2C6EAB;        /* Medical blue - main color */
+  --secondary-color: #34A885;      /* Soothing green - accent color */
+  --background-color: #F5F7FA;     /* Light gray background */
+  --text-color: #2D3748;          /* Dark gray for text */
+  --header-color: #1A365D;        /* Darker blue for headers */
+  --error-color: #E53E3E;         /* Red for warnings/errors */
+  --success-color: #48BB78;       /* Green for success messages */
+  --link-color: #2B6CB0;          /* Blue for links */
+  --border-color: #E2E8F0;        /* Light gray for borders */
+  --white: #FFFFFF;
+
+  /* Typography */
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 18px;
+  --font-size-xl: calc(10px + 2vmin);
+  --line-height: 1.5;
+
+  /* Spacing */
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+
+  /* Border Radius */
+  --border-radius: 8px;
+
+  /* Transitions */
+  --transition-speed: 0.3s;
+}
+
 .App {
   text-align: center;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  transition: all var(--transition-speed) ease-in-out;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,18 +51,56 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--header-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: var(--font-size-xl);
+  color: var(--white);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease-in-out;
+}
+
+.App-link:hover {
+  color: var(--secondary-color);
+}
+
+/* Button Styles */
+.button {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: var(--spacing-small) var(--spacing-medium);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease-in-out;
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Form Elements */
+.input {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-small);
+  font-size: var(--font-size-base);
+}
+
+/* Card Component */
+.card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: var(--spacing-medium);
 }
 
 @keyframes App-logo-spin {
@@ -34,5 +109,23 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Accessibility Features */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #0047AB;
+    --secondary-color: #006400;
+    --text-color: #000000;
+    --background-color: #FFFFFF;
   }
 }
