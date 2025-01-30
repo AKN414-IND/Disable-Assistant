@@ -8,9 +8,9 @@ body, html {
 
 .landing-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: var(--background-color);
   font-family: 'Poppins', sans-serif;
-  color: #ffffff;
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
 }
@@ -19,171 +19,166 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  padding: var(--spacing-medium) var(--spacing-large);
+  background-color: var(--header-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logout-container {
   display: flex;
   align-items: center;
+  gap: var(--spacing-medium);
 }
 
 .logout-btn, .admin-btn {
-  background-color: transparent;
-  color: #ffffff;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-  border-radius: 25px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color var(--transition-speed) ease-in-out;
+  font-size: var(--font-size-base);
   font-weight: 600;
 }
 
 .logout-btn:hover, .admin-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: #ffffff;
+  background-color: var(--secondary-color);
 }
 
 .content-area {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: var(--spacing-large);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  text-align: center;
+.content-area h1 {
+  color: var(--header-color);
+  font-size: calc(var(--font-size-xl) * 1.5);
+  margin-bottom: var(--spacing-medium);
   font-weight: 600;
-  letter-spacing: 1px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-p {
-  font-size: 1.2rem;
-  margin-bottom: 3rem;
+.content-area p {
+  color: var(--text-color);
+  font-size: var(--font-size-large);
+  margin-bottom: var(--spacing-large);
   text-align: center;
-  max-width: 600px;
-  line-height: 1.6;
+  max-width: 800px;
+  line-height: var(--line-height);
 }
 
 .options-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: var(--spacing-large);
   width: 100%;
-  max-width: 1200px;
 }
 
 .option {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 2rem;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-large);
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease-in-out;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: var(--spacing-medium);
   min-height: 200px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  position: relative;
-}
-
-.option::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-  transform: rotate(45deg);
-  transition: all 0.5s ease;
-  opacity: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .option:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.option:hover::before {
-  opacity: 1;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
 }
 
 .option h3 {
   margin: 0;
-  font-size: 1.4rem;
+  color: var(--header-color);
+  font-size: var(--font-size-large);
   font-weight: 600;
-  position: relative;
-  z-index: 1;
+}
+
+.option .anticon {
+  font-size: 2rem;
+  color: var(--primary-color);
 }
 
 /* Modal styles */
-.ant-modal-content {
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.profile-modal .ant-modal-content {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.ant-modal-header {
-  background-color: transparent;
-  border-bottom: none;
-  padding-top: 2rem;
+.profile-modal .ant-modal-header {
+  background-color: var(--header-color);
+  color: var(--white);
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
-.ant-modal-title {
-  color: #1a237e;
-  font-size: 1.8rem;
+.profile-modal .ant-modal-title {
+  color: var(--white);
+  font-size: var(--font-size-large);
   font-weight: 600;
 }
 
-.ant-modal-body {
-  padding: 2rem;
+.profile-modal .ant-modal-body {
+  padding: var(--spacing-large);
 }
 
-.ant-modal-footer {
-  border-top: none;
-  padding-bottom: 2rem;
+.profile-details {
+  text-align: center;
 }
 
-/* Avatar styles */
-.ant-avatar {
-  border: 3px solid #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.3s ease;
+.profile-details h3 {
+  color: var(--header-color);
+  margin: var(--spacing-medium) 0;
 }
 
-.ant-avatar:hover {
-  transform: scale(1.1);
+.profile-details p {
+  color: var(--text-color);
+  margin: var(--spacing-small) 0;
 }
 
-/* Responsive adjustments */
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .options-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .top-bar {
     flex-direction: column;
-    align-items: flex-start;
+    gap: var(--spacing-medium);
+    padding: var(--spacing-medium);
   }
 
-  .logout-container {
-    margin-top: 1rem;
+  .content-area {
+    padding: var(--spacing-medium);
+  }
+
+  .content-area h1 {
+    font-size: calc(var(--font-size-xl) * 1.2);
   }
 
   .options-container {
     grid-template-columns: 1fr;
   }
 
-  h1 {
-    font-size: 2.5rem;
+  .option {
+    min-height: 150px;
   }
 }
