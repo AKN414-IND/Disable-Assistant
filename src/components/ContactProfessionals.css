@@ -1,65 +1,132 @@
-.container {
+.professionals-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 50%, #9c27b0 100%);
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-}
-
-.title {
+  }
+  
+  h1 {
+    color: rgb(0, 0, 0);
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-}
-
-.professional-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
-
-.professional-card:hover {
-    transform: translateY(-5px);
-}
-
-.professional-image {
-    border-radius: 50%;
-    width: 100px;
-    height: 300px;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .subtitle {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+  
+  .professionals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
+  
+  .professional-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  
+  .professional-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .professional-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    margin: 0 auto;
-}
-
-.professional-name {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.professional-designation {
-    color: #666;
-}
-
-.button-container {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.contact-button {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.contact-button:last-child {
-    margin-right: 0;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
+  }
+  
+  .professional-info {
+    padding: 1.5rem;
+  }
+  
+  .professional-info h3 {
+    color: rgb(0, 0, 0);
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  
+  .designation {
+    color: #000000;
+    margin: 0.5rem 0 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .contact-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .whatsapp-button, .email-button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .whatsapp-button {
+    background-color: #25D366;
+    color: white;
+  }
+  
+  .whatsapp-button:hover {
+    background-color: #128C7E;
+  }
+  
+  .email-button {
+    background-color: #EA4335;
+    color: white;
+  }
+  .professional-info {
+    text-align: center;
+  }
+  
+  .email-button:hover {
+    background-color: #D73925;
+  }
+  
+  .loading, .error {
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .professionals-page {
+      padding: 1rem;
     }
-    
-    .professional-card {
-        margin-bottom: 20px;
+  
+    .professionals-grid {
+      grid-template-columns: 1fr;
     }
-}
+  
+    h1 {
+      font-size: 2rem;
+    }
+  }

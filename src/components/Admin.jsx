@@ -19,10 +19,10 @@ export default function Admin() {
         <div className="option" onClick={() => navigate('/future-enhancement')}>
           <h3>Future Enhancement</h3>
         </div>
-        <div className="option" onClick={() => navigate('/community')}>
+        <div className="option" onClick={() => navigate('/community-upload')}>
           <h3>Community</h3>
         </div>
-        <div className="option" onClick={() => navigate('/contact-professional')}>
+        <div className="option" onClick={() => navigate('/professional-upload')}>
           <h3>Contact Professionals</h3>
         </div>
         <div className="option" onClick={() => navigate('/kids-entertainment-upload')}>
