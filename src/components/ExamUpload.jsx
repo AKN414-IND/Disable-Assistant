@@ -161,6 +161,14 @@ const ExamUpload = () => {
             <Option value="Class 3">Class 3</Option>
             <Option value="Class 4">Class 4</Option>
             <Option value="Class 5">Class 5</Option>
+            <Option value="Class 6">Class 6</Option>
+              <Option value="Class 7">Class 7</Option>
+              <Option value="Class 8">Class 8</Option>
+              <Option value="Class 9">Class 9</Option>
+              <Option value="Class 10">Class 10</Option>
+              <Option value="Class 11">Class 11</Option>
+              <Option value="Class 12">Class 12</Option>
+
           </Select>
         </Form.Item>
         <Form.Item>
@@ -241,6 +249,14 @@ const ExamUpload = () => {
               <Option value="Class 3">Class 3</Option>
               <Option value="Class 4">Class 4</Option>
               <Option value="Class 5">Class 5</Option>
+              <Option value="Class 6">Class 6</Option>
+              <Option value="Class 7">Class 7</Option>
+              <Option value="Class 8">Class 8</Option>
+              <Option value="Class 9">Class 9</Option>
+              <Option value="Class 10">Class 10</Option>
+              <Option value="Class 11">Class 11</Option>
+              <Option value="Class 12">Class 12</Option>
+
             </Select>
           </Form.Item>
         </Form>

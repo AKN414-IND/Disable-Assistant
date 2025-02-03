@@ -36,7 +36,7 @@ export const LandingPage = () => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        setIsAdmin(currentUser.email === "appukuttan673@gmail.com");
+        setIsAdmin(currentUser.email === "projectpro53@gmail.com");
 
         const emailFirstLetter =
           currentUser.email.charAt(0).toUpperCase() +
