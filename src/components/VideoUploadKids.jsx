@@ -1,156 +1,205 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Input, List, Modal } from 'antd';
-import { database } from '../Firebase'; // Import the database
-import { ref, set, remove, onValue } from 'firebase/database'; // Import necessary functions from Firebase
-import './VideoUpload.css'; // Import CSS for styling (you can reuse the same CSS)
+import { ref, set, remove, onValue } from 'firebase/database';
+import './VideoUpload.css';
+import { database } from '../Firebase';
 
 const VideoUploadKids = () => {
   const [videoLink, setVideoLink] = useState('');
+  const [videoTitle, setVideoTitle] = useState('');
   const [videoList, setVideoList] = useState([]);
-  const [editingVideoId, setEditingVideoId] = useState(null); // State to hold the video ID being edited
-  const [editingVideoLink, setEditingVideoLink] = useState(''); // State to hold the new video link
-  const [videoTitle, setVideoTitle] = useState(''); // State to hold the video title
-  const [editingVideoTitle, setEditingVideoTitle] = useState(''); // State to hold the new video title during editing
+  const [editingVideo, setEditingVideo] = useState(null);
+  const [errors, setErrors] = useState({ title: '', link: '' });
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch the videos from Firebase Realtime Database under the 'kids' path
   useEffect(() => {
     const videoRef = ref(database, 'kids');
     onValue(videoRef, (snapshot) => {
-      const videos = [];
+      const kids = [];
       snapshot.forEach((childSnapshot) => {
         const videoData = childSnapshot.val();
-        videos.push(videoData);
+        kids.push(videoData);
       });
-      setVideoList(videos);
+      setVideoList(kids);
     });
   }, []);
 
-  // Upload a video with its link and title
+  const validateInputs = () => {
+    const newErrors = {};
+    
+    // Validate title
+    if (!videoTitle.trim()) {
+      newErrors.title = 'Title is required';
+    } else if (videoTitle.length > 100) {
+      newErrors.title = 'Title must be less than 100 characters';
+    }
+    
+    // Validate YouTube link
+    if (!videoLink.trim()) {
+      newErrors.link = 'Video link is required';
+    } else {
+      const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
+      if (!youtubeRegex.test(videoLink)) {
+        newErrors.link = 'Please enter a valid YouTube URL';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleUpload = async () => {
-    if (!videoLink || !videoTitle) {
-      alert('Please enter a video title and link!');
-      return;
-    }
+    if (!validateInputs()) return;
 
-    const videoId = videoLink.split('v=')[1]?.split('&')[0];
-    if (!videoId) {
-      alert('Please enter a valid YouTube link!');
-      return;
-    }
-
-    const videoData = {
-      id: videoId,
-      link: videoLink,
-      title: videoTitle, // Store the video title
-    };
-
+    setIsLoading(true);
     try {
-      const videoRef = ref(database, 'kids/' + videoId); // Store under 'kids'
+      const videoId = videoLink.split('v=')[1]?.split('&')[0];
+      if (!videoId) {
+        alert('Please enter a valid YouTube link!');
+        return;
+      }
+
+      const videoData = {
+        id: videoId,
+        link: videoLink,
+        title: videoTitle,
+      };
+
+      const videoRef = ref(database, 'kids/' + videoId);
       await set(videoRef, videoData);
-      alert('Video link and title uploaded successfully!');
       setVideoLink('');
-      setVideoTitle(''); // Clear the input fields
+      setVideoTitle('');
     } catch (error) {
-      alert('Error uploading video. Please try again.');
+      setErrors({ global: 'Failed to upload video. Please try again.' });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Handle editing of a video
-  const handleEdit = (id, link, title) => {
-    setEditingVideoId(id);
-    setEditingVideoLink(link);
-    setEditingVideoTitle(title);
-  };
-
-  // Update the edited video link and title
   const handleUpdate = async () => {
-    if (!editingVideoLink || !editingVideoTitle) {
-      alert('Please enter a valid video title and link!');
+    if (!editingVideo.link || !editingVideo.title) {
+      alert('Please enter both video title and link!');
       return;
     }
 
-    const videoRef = ref(database, 'kids/' + editingVideoId);
+    const videoRef = ref(database, 'kids/' + editingVideo.id);
     try {
-      await set(videoRef, { id: editingVideoId, link: editingVideoLink, title: editingVideoTitle });
-      alert('Video updated successfully!');
-      setEditingVideoId(null);
-      setEditingVideoLink('');
-      setEditingVideoTitle('');
+      await set(videoRef, editingVideo);
+      setEditingVideo(null);
     } catch (error) {
-      alert('Error updating video. Please try again.');
+      console.error('Update error:', error);
     }
   };
 
-  // Handle deletion of a video
   const handleDelete = async (id) => {
     const videoRef = ref(database, 'kids/' + id);
     try {
       await remove(videoRef);
-      alert('Video deleted successfully!');
     } catch (error) {
-      alert('Error deleting video. Please try again.');
+      console.error('Delete error:', error);
     }
   };
 
   return (
-    <div className="video-upload-page">
-      <h1>Upload YouTube Video for Kids</h1>
-      <Input
-        placeholder="Enter Video Title"
-        value={videoTitle}
-        onChange={(e) => setVideoTitle(e.target.value)}
-        style={{ width: '300px', marginRight: '10px' }}
-      />
-      <Input
-        placeholder="Enter YouTube Video Link"
-        value={videoLink}
-        onChange={(e) => setVideoLink(e.target.value)}
-        style={{ width: '300px', marginRight: '10px' }}
-      />
-      <Button type="primary" onClick={handleUpload}>
-        Upload
-      </Button>
+    <div className="video-upload-container">
+      <div className="video-upload-wrapper">
+        <h1>YouTube Video Library</h1>
+        
+        {errors.global && <div className="global-error">{errors.global}</div>}
+        
+        <div className="input-section">
+          
+            <input
+              type="text"
+              placeholder="Video Title"
+              value={videoTitle}
+              onChange={(e) => {
+                setVideoTitle(e.target.value);
+                setErrors({ ...errors, title: '' });
+              }}
+              className={errors.title ? 'input-error' : ''}
+              disabled={isLoading}
+              maxLength={100}
+            />
+            {errors.title && <span className="error-message">{errors.title}</span>}
+          
+            <input
+              type="text"
+              placeholder="YouTube Video Link"
+              value={videoLink}
+              onChange={(e) => {
+                setVideoLink(e.target.value);
+                setErrors({ ...errors, link: '' });
+              }}
+              className={errors.link ? 'input-error' : ''}
+              disabled={isLoading}
+            />
+            {errors.link && <span className="error-message">{errors.link}</span>}
+          
+          
+          <button 
+            onClick={handleUpload}
+            disabled={isLoading || !videoTitle.trim() || !videoLink.trim()}
+          >
+            {isLoading ? 'Adding...' : 'Add Video'}
+          </button>
+        </div>
 
-      <h2 style={{ marginTop: '20px' }}>Uploaded Videos</h2>
-      <List
-        bordered
-        dataSource={videoList}
-        renderItem={(item) => (
-          <List.Item>
-            <a href={`https://www.youtube.com/watch?v=${item.id}`} target="_blank" rel="noopener noreferrer">
-              {item.title} ({item.link})
-            </a>
-            <Button onClick={() => handleEdit(item.id, item.link, item.title)} style={{ marginLeft: '10px' }}>
-              Edit
-            </Button>
-            <Button onClick={() => handleDelete(item.id)} type="danger" style={{ marginLeft: '10px' }}>
-              Delete
-            </Button>
-          </List.Item>
+        <div className="video-list">
+          {videoList.map((video) => (
+            <div key={video.id} className="video-item">
+              <a 
+                href={`https://www.youtube.com/watch?v=${video.id}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <div className="video-details">
+                  <h3>{video.title}</h3>
+                  <p>{video.link}</p>
+                </div>
+              </a>
+              <div className="video-actions">
+                <button onClick={() => setEditingVideo(video)}>
+                  Edit
+                </button>
+                <button 
+                  className="delete-btn" 
+                  onClick={() => handleDelete(video.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {editingVideo && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h2>Edit Video</h2>
+              <input
+                type="text"
+                value={editingVideo.title}
+                onChange={(e) => setEditingVideo({...editingVideo, title: e.target.value})}
+                placeholder="Video Title"
+              />
+              <input
+                type="text"
+                value={editingVideo.link}
+                onChange={(e) => setEditingVideo({...editingVideo, link: e.target.value})}
+                placeholder="Video Link"
+              />
+              <div className="modal-actions">
+                <button onClick={() => setEditingVideo(null)}>
+                  Cancel
+                </button>
+                <button onClick={handleUpdate}>
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
         )}
-        style={{ marginTop: '20px' }}
-      />
-
-      {editingVideoId && (
-        <Modal
-          title="Edit Video Details"
-          visible={!!editingVideoId}
-          onOk={handleUpdate}
-          onCancel={() => setEditingVideoId(null)}
-        >
-          <Input
-            placeholder="Edit Video Title"
-            value={editingVideoTitle}
-            onChange={(e) => setEditingVideoTitle(e.target.value)}
-            style={{ marginBottom: '10px' }}
-          />
-          <Input
-            placeholder="Edit YouTube Video Link"
-            value={editingVideoLink}
-            onChange={(e) => setEditingVideoLink(e.target.value)}
-          />
-        </Modal>
-      )}
+      </div>
     </div>
   );
 };

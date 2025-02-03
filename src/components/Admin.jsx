@@ -5,28 +5,56 @@ import './Admin.css';
 export default function Admin() {
   const navigate = useNavigate();
 
+  const adminOptions = [
+    { 
+      title: 'Videos', 
+      route: '/upload-video',
+      icon: '🎥'
+    },
+    { 
+      title: 'Exam', 
+      route: '/exam-upload',
+      icon: '📝'
+    },
+    { 
+      title: 'Future Enhancement', 
+      route: '/future-enhancement',
+      icon: '🚀'
+    },
+    { 
+      title: 'Community', 
+      route: '/community-upload',
+      icon: '👥'
+    },
+    { 
+      title: 'Contact Professionals', 
+      route: '/professional-upload',
+      icon: '💼'
+    },
+    { 
+      title: 'Kids Entertainment', 
+      route: '/kids-entertainment-upload',
+      icon: '🧸'
+    }
+  ];
+
   return (
-    <div className="admin-page">
-      <h1>Admin Dashboard</h1>
-      <p>Select an option to manage:</p>
-      <div className="options-container">
-        <div className="option" onClick={() => navigate('/upload-video')}>
-          <h3>Videos</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/exam-upload')}>
-          <h3>Exam</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/future-enhancement')}>
-          <h3>Future Enhancement</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/community-upload')}>
-          <h3>Community</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/professional-upload')}>
-          <h3>Contact Professionals</h3>
-        </div>
-        <div className="option" onClick={() => navigate('/kids-entertainment-upload')}>
-          <h3>Kids Entertainment</h3>
+    <div className="admin-container">
+      <div className="admin-wrapper">
+        <h1>Admin Dashboard</h1>
+        <p>Select an option to manage:</p>
+        
+        <div className="admin-options">
+          {adminOptions.map((option, index) => (
+            <div 
+              key={index} 
+              className="admin-option" 
+              onClick={() => navigate(option.route)}
+            >
+              <span className="admin-option-icon">{option.icon}</span>
+              <h3>{option.title}</h3>
+            </div>
+          ))}
         </div>
       </div>
     </div>

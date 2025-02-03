@@ -1,119 +1,76 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.admin-page {
+.admin-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 50%, #9c27b0 100%);
-  font-family: 'Poppins', sans-serif;
-  color: #ffffff;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 2rem;
 }
 
-h1 {
-  font-size: 3rem;
+.admin-wrapper {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 2rem;
+  text-align: center;
+}
+
+.admin-wrapper h1 {
+  color: #2c3e50;
   margin-bottom: 1rem;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-p {
-  font-size: 1.2rem;
-  margin-bottom: 3rem;
-  text-align: center;
-  max-width: 600px;
-  line-height: 1.6;
-  margin-left: auto;
-  margin-right: auto;
+.admin-wrapper p {
+  color: #7f8c8d;
+  margin-bottom: 2rem;
 }
 
-.options-container {
+.admin-options {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 1rem;
 }
 
-.option {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 2rem;
-  text-align: center;
+.admin-option {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 200px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  position: relative;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.option::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-  transform: rotate(45deg);
-  transition: all 0.5s ease;
-  opacity: 0;
+.admin-option:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.1);
 }
 
-.option:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  background-color: rgba(255, 255, 255, 0.2);
+.admin-option-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.option:hover::before {
-  opacity: 1;
-}
-
-.option h3 {
+.admin-option h3 {
+  color: #2c3e50;
   margin: 0;
-  font-size: 1.4rem;
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .options-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium-sized screens */
-  }
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
-  .admin-page {
-    padding: 1rem;
+  .admin-options {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .options-container {
-    grid-template-columns: 1fr; /* 1 column for small screens */
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  p {
-    font-size: 1rem;
+@media (max-width: 480px) {
+  .admin-options {
+    grid-template-columns: 1fr;
   }
 }
