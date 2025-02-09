@@ -2,36 +2,36 @@
 
 .upload-page {
   min-height: 100vh;
-  background: #ffffff;
+  background: #f9f9f9;
   padding: 2rem;
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
-.upload-container {
+.upload-container, .list-container {
   width: 100%;
   max-width: 600px;
   background: #ffffff;
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  margin-top: 2rem;
 }
 
-h1 {
+h1, h2 {
   color: #000000;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 2rem;
-  text-shadow: none;
+  margin-bottom: 1.5rem;
 }
 
 .message {
-  background: #f5f5f5;
-  color: #000000;
+  background: #e3f2fd;
+  color: #1565c0;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -42,7 +42,7 @@ h1 {
 .upload-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .form-group {
@@ -52,59 +52,28 @@ h1 {
 }
 
 label {
-  color: #000000;
+  color: #333;
   font-weight: 500;
   font-size: 0.95rem;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
+input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ddd;
   border-radius: 8px;
   background: #ffffff;
-  color: #000000;
-  font-family: inherit;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: border 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
+input:focus {
+  border-color: #1976d2;
   outline: none;
-  border-color: #2196f3;
-  background: #ffffff;
-}
-
-input[type="file"] {
-  width: 100%;
-  padding: 0.75rem;
-  background: #f5f5f5;
-  border-radius: 8px;
-  color: #000000;
-  cursor: pointer;
-}
-
-input[type="file"]::-webkit-file-upload-button {
-  background: #2196f3;
-  border: none;
-  padding: 0.5rem 1rem;
-  margin-right: 1rem;
-  color: #ffffff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-input[type="file"]::-webkit-file-upload-button:hover {
-  background: #1976d2;
 }
 
 .submit-button {
-  background: #2196f3;
+  background: #1976d2;
   color: #ffffff;
   padding: 1rem;
   border: none;
@@ -113,67 +82,96 @@ input[type="file"]::-webkit-file-upload-button:hover {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1rem;
 }
 
 .submit-button:hover:not(:disabled) {
-  background: #1976d2;
+  background: #1565c0;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
 }
 
 .submit-button:disabled {
-  background: #cccccc;
+  background: #bdbdbd;
   cursor: not-allowed;
   opacity: 0.7;
 }
 
-
-input:invalid,
-textarea:invalid {
-  border-color: #ff6b6b;
+.list-container {
+  text-align: center;
+  padding: 2rem;
 }
 
-
-::placeholder {
-  color: #757575;
+.professional-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+.professional-item {
+  background: #fafafa;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.professional-item:hover {
+  transform: scale(1.02);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-button, .delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.edit-button {
+  background: #ffb300;
+  color: white;
+}
+
+.edit-button:hover {
+  background: #ff8f00;
+}
+
+.delete-button {
+  background: #d32f2f;
+  color: white;
+}
+
+.delete-button:hover {
+  background: #b71c1c;
+}
 
 @media (max-width: 768px) {
   .upload-page {
     padding: 1rem;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .upload-container {
+  .upload-container, .list-container {
+    width: 90%;
     padding: 1.5rem;
-    margin-top: 1rem;
   }
 
-  h1 {
-    font-size: 1.75rem;
+  h1, h2 {
+    font-size: 1.5rem;
   }
 
   .submit-button {
     padding: 0.875rem;
   }
-}
-
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-.submit-button:disabled {
-  animation: pulse 1.5s infinite;
-}
-
-
-input:focus-visible,
-textarea:focus-visible,
-button:focus-visible {
-  outline: 2px solid #2196f3;
-  outline-offset: 2px;
 }
