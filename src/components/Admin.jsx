@@ -17,7 +17,7 @@ export default function Admin() {
       icon: '📝'
     },
     { 
-      title: 'Future Enhancement', 
+      title: 'AI Support', 
       route: '/future-enhancement',
       icon: '🚀'
     },

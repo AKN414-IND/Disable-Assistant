@@ -81,7 +81,7 @@ export const LandingPage = () => {
     { title: "Videos", icon: <VideoCameraOutlined />, path: "/videos" },
     { title: "Exam", icon: <FormOutlined />, path: "/exam" },
     {
-      title: "Future Enhancement",
+      title: "AI Support",
       icon: <RocketOutlined />,
       path: "/future-enhancement",
     },
